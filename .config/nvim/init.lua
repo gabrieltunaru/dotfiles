@@ -2,7 +2,7 @@
 plugins = require("plugins")
 telescoper = require("telescoper")
 treesitter = require("treesitter")
-
+my_trouble = require("my_trouble")
 -------------------------------------------------------------------------------
 -- These are example settings to use with nvim-metals and the nvim built-in
 -- LSP. Be sure to thoroughly read the `:help nvim-metals` docs to get an
@@ -86,7 +86,7 @@ end)
 
 map("n", "gds", function()
   vim.lsp.buf.document_symbol()
-end)
+end);
 
 map("n", "gws", function()
   vim.lsp.buf.workspace_symbol()
@@ -95,6 +95,11 @@ end)
 map("n", "<leader>cl", function()
   vim.lsp.codelens.run()
 end)
+
+map("n", "<leader>ck", function()
+  vim.lsp.codelens.refresh()
+end)
+
 
 map("n", "<leader>sh", function()
   vim.lsp.buf.signature_help()
@@ -357,3 +362,30 @@ metals_config.tvp = {
 
 -- auto-format
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
+
+-- trouble
+-- Lua
+vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "<leader>xl", "<cmd>TroubleToggle loclist<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",
+  {silent = true, noremap = true}
+)
+vim.keymap.set("n", "gR", "<cmd>TroubleToggle lsp_references<cr>",
+  {silent = true, noremap = true}
+)
+
+
+--nvim-tree
+vim.keymap.set("n", "<leader>tr", "<cmd>NvimTreeToggle<cr>")
+
+vim.cmd.colorscheme('sonokai')
