@@ -1,4 +1,3 @@
-
 plugins = require("plugins")
 telescoper = require("telescoper")
 treesitter = require("treesitter")
@@ -311,21 +310,30 @@ require'nvim-web-devicons'.setup {
 
 -- OR setup with some options
 require("nvim-tree").setup({
-  sort_by = "case_sensitive",
-  view = {
-    adaptive_size = true,
-    mappings = {
-      list = {
-        { key = "u", action = "dir_up" },
-      },
-    },
-  },
-  renderer = {
-    group_empty = true,
-  },
-  filters = {
-    dotfiles = true,
-  },
+	update_cwd = true,
+	open_on_setup = true,
+	open_on_setup_file = true,
+	actions = {
+		open_file = {
+			resize_window = true,
+		},
+	},
+	view = {
+		side = "left",
+	},
+	update_focused_file = {
+		enable = true,
+		update_cwd = true,
+	},
+	filters = {
+		dotfiles = false,
+	},
+	diagnostics = {
+		enable = true,
+	},
+	git = {
+		ignore = false,
+	}
 })
 
 -- tabs
@@ -361,7 +369,7 @@ metals_config.tvp = {
   }
 
 -- auto-format
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
 
 -- trouble
 -- Lua
